@@ -54,4 +54,4 @@ Steady aims to become a financial stability companion for Uber drivers and couri
 # micro:
 Empower individual Uber and Uber Eats drivers with financial clarity and control. By helping them anticipate their income, understand what drives volatility, and make smarter work decisions, Steady directly improves their financial well-being and sense of security.
 # macro:
-Advance economic stability and fairness within the gig economy. As Steady scales, aggregated and anonymized data can shed light on systemic volatility patterns — informing better public policy, fairer platform practices, and data-driven approaches to improving income predictability across the global gig workforc
+Advance economic stability and fairness within the gig economy. As Steady scales, aggregated and anonymized data can shed light on systemic volatility patterns — informing better public policy, fairer platform practices, and data-driven approaches to improving income predictability across the global gig workforce
