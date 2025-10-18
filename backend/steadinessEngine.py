@@ -7,7 +7,6 @@ This is different from total earnings - you can earn a lot but inconsistently
 Steadiness = Key to financial planning and peace of mind
 A driver with 72% steadiness knows they can reliably budget their expenses
 
-This engine feeds into the circular chart shown in Image 1 (72% score)
 """
 
 def get_steadiness_score(driver_id: str, period: str = "weekly"):
