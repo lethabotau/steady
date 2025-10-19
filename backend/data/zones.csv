@@ -1,0 +1,9 @@
+zone_id,zone_name,lat,lng,radius_km,base_demand,weekend_mult,rain_mult,event_mult
+CBD,CBD & Haymarket,-33.8696,151.2069,3.0,1.20,1.10,1.20,1.15
+EAST,Eastern Suburbs,-33.8928,151.2480,4.0,1.05,1.08,1.15,1.10
+INNER,Inner West,-33.8890,151.1410,5.0,1.00,1.06,1.10,1.05
+NORTH,Lower North Shore,-33.8290,151.2120,4.0,1.05,1.06,1.10,1.05
+PARRA,Parramatta,-33.8140,151.0010,4.5,0.95,1.04,1.08,1.08
+WEST,Western Sydney,-33.7720,150.8080,7.0,0.90,1.03,1.05,1.06
+NB,Northern Beaches,-33.7310,151.3000,6.0,0.90,1.05,1.10,1.05
+SOUTH,St George & Shire,-34.0200,151.0600,6.0,0.92,1.04,1.08,1.05
