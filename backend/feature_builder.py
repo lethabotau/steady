@@ -2,7 +2,6 @@ import os
 import glob
 import pandas as pd
 
-
 def load_context(context_path: str) -> pd.DataFrame:
     """Load daily weather, event, and competition data."""
     context_data = pd.read_csv(context_path)
