@@ -3,11 +3,11 @@ Flask Backend Server for Steady App
 """
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import forecast_engine as forecast
-import insights_engine as insights
-import steadiness_engine as steadiness
-import recommendation_engine as recommendations
-import feature_builder as features
+import forecast as forecast
+import insights as insights
+import steadinessEngine as steadiness
+import recommendation as recommendations
+import features as features
 
 app = Flask(__name__)
 CORS(app)  # Allow all origins for development
