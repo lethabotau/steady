@@ -13,6 +13,7 @@ import csv
 import os
 from datetime import datetime, timedelta
 from collections import defaultdict
+from steadinessEngine import DriverSession
 
 #Directory where all CSV files are stored created by data_gen.py
 DATA_DIR="data" 
@@ -303,3 +304,34 @@ def build_features(driver_id: str, date: str):
         "weekly_aggregates": get_weekly_aggregates(driver_id, weeks=12),
         "daily_aggregates": get_daily_aggregates(driver_id, days=90)
     }
+
+def load_driver_sessions_for_steadiness(driver_id: str):
+    """
+    Converts CSV trip data to DriverSession objects for SteadinessEngine
+    
+    Args:
+        driver_id: Driver identifier (e.g., "driver1")
+    
+    Returns:
+        List of DriverSession objects
+    """
+    driver_data = load_driver_data(driver_id)
+    trips = driver_data['raw_trips']
+    
+    sessions = []
+    for trip in trips:
+        # Parse date string to datetime
+        date_str = trip['date']
+        timestamp = datetime.strptime(date_str, '%Y-%m-%d')
+        
+        # Create DriverSession object
+        session = DriverSession(
+            driver_id=driver_id,
+            timestamp=timestamp,
+            hours_worked=float(trip['hours']),
+            earnings=float(trip['earnings']),
+            zones=[trip['zone']]  # Wrap single zone in list
+        )
+        sessions.append(session)
+    
+    return sessions

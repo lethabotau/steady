@@ -837,3 +837,46 @@ class SteadinessEngine:
             "summary": reason,
             "weeks_analyzed": 0
         }
+
+
+# Global engine instance
+_engine = SteadinessEngine(city="Sydney")
+
+def get_steadiness_score(driver_id: str, period: str = "weekly"):
+    """
+    Module-level wrapper for server.py
+    """
+    import features
+    
+    # Load and cache sessions if not already loaded
+    if driver_id not in _engine._session_cache:
+        sessions = features.load_driver_sessions_for_steadiness(driver_id)
+        _engine.load_driver_sessions(driver_id, sessions)
+    
+    return _engine.get_steadiness_score(driver_id, period)
+
+def get_consistency_breakdown(driver_id: str):
+    """
+    Module-level wrapper for server.py
+    """
+    import features
+    
+    # Load and cache sessions if not already loaded
+    if driver_id not in _engine._session_cache:
+        sessions = features.load_driver_sessions_for_steadiness(driver_id)
+        _engine.load_driver_sessions(driver_id, sessions)
+    
+    return _engine.get_consistency_breakdown(driver_id)
+
+def get_volatility_trend(driver_id: str, weeks: int = 12):
+    """
+    Module-level wrapper for server.py
+    """
+    import features
+    
+    # Load and cache sessions if not already loaded
+    if driver_id not in _engine._session_cache:
+        sessions = features.load_driver_sessions_for_steadiness(driver_id)
+        _engine.load_driver_sessions(driver_id, sessions)
+    
+    return _engine.get_volatility_trend(driver_id, weeks)

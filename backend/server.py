@@ -19,7 +19,7 @@ def get_home_overview():
     driver_id = request.args.get('driver_id', 'driver1')
     return jsonify({
         "forecast": forecast.get_weekly_forecast(driver_id, "2026-10-20"),
-        "steadiness": steadiness.get_steadiness_score(driver_id),
+        "steadiness": steadiness.get_steadiness_score(driver_id, "weekly"),
         "goal_progress": recommendations.get_goal_progress(driver_id)
     })
 
