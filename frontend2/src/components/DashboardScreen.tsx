@@ -6,11 +6,15 @@ interface DashboardScreenProps {
 }
 
 export function DashboardScreen({ weeklyGoal }: DashboardScreenProps) {
-  const forecastAmount = 910;
-  const forecastVariance = 65;
-  const currentProgress = 745;
-  const steadinessScore = 78; // 0-100
-
+    const forecastAmount = Math.round(weeklyGoal * 0.95);
+    const forecastVariance = Math.round(weeklyGoal * 0.07);
+    const currentProgress = Math.round(weeklyGoal * 0.75);
+    const steadinessScore = 78;
+    const remaining = Math.max(weeklyGoal - currentProgress, 0);
+    const progressPercent =
+      weeklyGoal > 0
+        ? Math.min(Math.round((currentProgress / weeklyGoal) * 100), 100)
+        : 0;
   return (
     <div className="pb-20 px-6 pt-8" style={{ backgroundColor: '#FAF8F5' }}>
       {/* Header */}
@@ -125,14 +129,14 @@ export function DashboardScreen({ weeklyGoal }: DashboardScreenProps) {
             <Target size={20} style={{ color: '#1E4E40' }} />
             <span style={{ color: '#222' }}>Weekly Goal</span>
           </div>
-          <span className="text-sm" style={{ color: '#6CA58E' }}>{Math.round((currentProgress / weeklyGoal) * 100)}%</span>
+          <span className="text-sm" style={{ color: '#6CA58E' }}> {progressPercent}% </span>
         </div>
         <div className="mb-3">
           <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
             <div
               className="h-full rounded-full transition-all"
               style={{
-                width: `${Math.min((currentProgress / weeklyGoal) * 100, 100)}%`,
+                width: `${progressPercent}%`,
                 backgroundColor: '#6CA58E'
               }}
             />
@@ -143,9 +147,9 @@ export function DashboardScreen({ weeklyGoal }: DashboardScreenProps) {
           <span className="text-gray-500">${weeklyGoal} goal</span>
         </div>
         <div className="mt-4 pt-4 border-t border-gray-100">
-          <div className="flex items-center gap-2 text-sm" style={{ color: '#E09447' }}>
+        <div className="flex items-center gap-2 text-sm" style={{ color: '#E09447' }}>
             <AlertCircle size={16} />
-            <span>Drive ${weeklyGoal - currentProgress} more to hit your goal</span>
+            <span>Drive ${remaining} more to hit your goal</span>
           </div>
         </div>
       </div>
