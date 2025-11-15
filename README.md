@@ -1,4 +1,4 @@
-# Steady
+# steady
 
 ## Problem
 Gig workers (primary focus - Uber/Uber Eats drivers) ace highly variable weekly earnings due to inconsistent hours, fluctuating demand, and external factors such as weather, events, and competition. This income volatility makes financial planning and budgeting difficult, often leading to stress and uncertainty. Existing budgeting or finance apps are not built around the realities of gig work, where income is irregular and driven by dynamic working conditions.
