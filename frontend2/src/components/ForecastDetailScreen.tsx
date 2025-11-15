@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Calendar, Filter } from 'lucide-react';
+interface ForecastDetailScreenProps {
+  weeklyGoal: number;
+}
 
 const mockData = [
   { week: 'Aug 19', earnings: 820, lower: 760, upper: 880 },
@@ -18,8 +21,12 @@ const mockData = [
   { week: 'Nov 11', earnings: 910, lower: 845, upper: 975, forecast: true },
 ];
 
-export function ForecastDetailScreen() {
+export function ForecastDetailScreen({ weeklyGoal }: ForecastDetailScreenProps) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+
+  const baseForecast = Math.round(weeklyGoal * 0.95);
+  const lowerBound = Math.round(weeklyGoal * 0.85);
+  const upperBound = Math.round(weeklyGoal * 1.10); 
 
   const filters = ['Weekday', 'Zone', 'Shift Type'];
 
@@ -61,9 +68,12 @@ export function ForecastDetailScreen() {
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl" style={{ color: '#1E4E40' }}>$910</span>
-            <span className="text-gray-400">± $65</span>
+            <span className="text-3xl" style={{ color: '#1E4E40' }}>${baseForecast}</span>
+            <span className="text-gray-400">± ${upperBound - baseForecast}</span>
           </div>
+          <p className="text-sm text-gray-500 mt-1">
+            Likely range: ${lowerBound} – ${upperBound}
+          </p>
         </div>
 
         <div className="h-64 -mx-2">
@@ -121,7 +131,6 @@ export function ForecastDetailScreen() {
                 stroke="#1E4E40"
                 strokeWidth={3}
                 fill="url(#colorEarnings)"
-                strokeDasharray={(entry) => entry?.forecast ? "5 5" : "0"}
               />
             </AreaChart>
           </ResponsiveContainer>

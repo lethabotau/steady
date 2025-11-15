@@ -1,13 +1,18 @@
 import React from 'react';
 import { Clock, TrendingUp, Cloud, Calendar, MapPin, Zap, Users, DollarSign } from 'lucide-react';
 
-export function InsightsScreen() {
+interface InsightsScreenProps {
+  weeklyGoal: number;
+}
+
+export function InsightsScreen({ weeklyGoal }: InsightsScreenProps) {
+  const extraFromPeak = Math.round(weeklyGoal * 0.18);
   const timingInsights = [
     {
       icon: Clock,
       title: 'Peak earning hours',
       stat: '6 PM - 9 PM',
-      description: 'You earn 18% more during evening rush',
+      description: `You earn ~18% more during evening rush (~$${extraFromPeak} vs your weekly target).`,
       color: '#E09447'
     },
     {

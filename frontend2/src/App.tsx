@@ -12,7 +12,12 @@ type AppScreen = 'login' | 'onboarding' | 'dashboard' | 'forecast' | 'insights' 
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<AppScreen>('login');
-  const [weeklyGoal, setWeeklyGoal] = useState(1000);
+  const [weeklyGoal, setWeeklyGoal] = useState(() => {
+    if (typeof window === 'undefined') return 1000;
+    const saved = window.localStorage.getItem('steady:weeklyGoal');
+    const parsed = saved ? parseInt(saved, 10) : NaN;
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 1000;
+  });
   const [userData, setUserData] = useState<OnboardingData | null>(null);
 
   const handleLogin = () => {
@@ -21,7 +26,7 @@ export default function App() {
 
   const handleOnboardingComplete = (data: OnboardingData) => {
     setUserData(data);
-    setWeeklyGoal(data.weeklyGoal);
+    persistWeeklyGoal(data.weeklyGoal);
     setCurrentScreen('dashboard');
   };
 
@@ -30,7 +35,14 @@ export default function App() {
   };
 
   const handleUpdateGoal = (newGoal: number) => {
+    persistWeeklyGoal(newGoal);
+  };
+
+  const persistWeeklyGoal = (newGoal: number) => {
     setWeeklyGoal(newGoal);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('steady:weeklyGoal', String(newGoal));
+    }
   };
 
   return (
@@ -51,15 +63,15 @@ export default function App() {
       )}
 
       {currentScreen === 'forecast' && (
-        <ForecastDetailScreen />
+        <ForecastDetailScreen weeklyGoal={weeklyGoal} />
       )}
 
       {currentScreen === 'insights' && (
-        <InsightsScreen />
+        <InsightsScreen weeklyGoal={weeklyGoal} />
       )}
 
       {currentScreen === 'trends' && (
-        <TrendsScreen />
+        <TrendsScreen weeklyGoal={weeklyGoal} />
       )}
 
       {currentScreen === 'profile' && (
